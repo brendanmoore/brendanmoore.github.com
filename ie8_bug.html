@@ -75,7 +75,7 @@
                 alert("pasted");
             }, false);
         } else if ('attachEvent' in window){
-            document.attachEvent('onpaste', function(){
+            document.getElementById("container2").attachEvent('onpaste', function(){
                     alert('Pasted!');
             });
         }
