@@ -21,7 +21,13 @@
     </style>
 </head>
 <body>
+    <h1>React: IE8 onPaste example: </h1>
+    <p>This example pages shows the issue that the onPaste event is not being fired in React in IE8.</p>
+    <p><b>Pasting into either container should show an alert box.</b></p>
+    <h2>1. React container:</h2>
     <div id="container"></div>
+    <h2>2. Standard container with Event Listener</h2>
+    <div id="container2" class="editable" contenteditable="true"></div>
     <script>
     // Console-polyfill. MIT license.
     // https://github.com/paulmillr/console-polyfill
@@ -52,7 +58,24 @@
         }
     });
 
-    React.renderComponent(Editable(), document.getElementById('container'));
+
+
+
+    window.onload = function(){
+        React.renderComponent(Editable(), document.getElementById('container'));
+
+        if('addEventListener' in window){
+            document.getElementById("container2").addEventListener('paste', function(){
+                alert("pasted");
+            }, false);
+        } else if ('attachEvent' in window){
+            document.getElementById("container2").attachEvent('onpaste', function(){
+                alert("pasted");
+            });
+        }
+
+    };
+
     </script>
 </body>
 </html>
