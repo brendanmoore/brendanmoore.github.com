@@ -21,6 +21,7 @@
     </style>
 </head>
 <body>
+
     <h1>React: IE8 onPaste example: </h1>
     <p>This example pages shows the issue that the onPaste event is not being fired in React in IE8.</p>
     <p><b>Pasting into either container should show an alert box.</b></p>
@@ -28,7 +29,9 @@
     <div id="container"></div>
     <h2>2. Standard container with Event Listener</h2>
     <div id="container2" class="editable" contenteditable="true"></div>
+
     <script>
+
     // Console-polyfill. MIT license.
     // https://github.com/paulmillr/console-polyfill
     // Make it safe to do console.log() always.
@@ -45,6 +48,10 @@
       while (method = methods.pop()) con[method] = con[method] || dummy;
     })(this.console = this.console || {}); // Using `this` for web workers.
 
+
+    /**
+     * Simple React contentEditable.
+     */
     var Editable = React.createClass({
         render: function(){
             return React.DOM.div({
@@ -58,9 +65,7 @@
         }
     });
 
-
-
-
+    //Load all of the things
     window.onload = function(){
         React.renderComponent(Editable(), document.getElementById('container'));
 
@@ -73,9 +78,22 @@
                 alert("pasted");
             });
         }
-
     };
 
     </script>
+
+
+
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-34444698-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+
 </body>
 </html>
