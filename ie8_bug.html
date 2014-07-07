@@ -29,7 +29,8 @@
     <div id="container"></div>
     <h2>2. Standard container with Event Listener</h2>
     <div id="container2" class="editable" contenteditable="true"></div>
-
+    <h2>3. Standard container with Event Listener via Bubbling</h2>
+    <div id="container3" class="editable" contenteditable="true"></div>
     <script>
 
     // Console-polyfill. MIT license.
@@ -74,10 +75,25 @@
                 alert("pasted");
             }, false);
         } else if ('attachEvent' in window){
-            document.getElementById("container2").attachEvent('onpaste', function(){
-                alert("pasted");
+            document.attachEvent('onpaste', function(){
+                    alert('Pasted!');
             });
         }
+
+        var bubbleFn = function(e){
+            e = e || window.event;
+            var t = e.target || e.srcElement;
+            if(t == document.getElementById('container3')){
+                alert('Pasted!');
+            }
+        };
+
+        if('addEventListener' in window){
+            document.addEventListener('paste', bubbleFn, false);
+        } else if ('attachEvent' in window){
+            document.attachEvent('onpaste', bubbleFn);
+        }
+
     };
 
     </script>
